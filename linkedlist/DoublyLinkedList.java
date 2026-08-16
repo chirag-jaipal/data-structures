@@ -49,9 +49,14 @@ public class DoublyLinkedList {
   }
 
   public void insertAfter(int value, int ele) {
+    Node temp = this.head;
+    if (temp == null) {
+      System.out.print("LinkedList is empty.");
+      return;
+    }
+
     Node newNode = new Node(value);
 
-    Node temp = this.head;
     while (temp.next != null) {
       if (temp.data == ele) {
         newNode.next = temp.next;
@@ -72,6 +77,35 @@ public class DoublyLinkedList {
 
     /// If the element is not found
     System.out.println(ele + " not found");
+  }
+
+  public void delete(int ele) {
+    Node temp = this.head;
+    if (temp == null) {
+      System.out.print("LinkedList is empty.");
+      return;
+    }
+
+    while (temp.next != null) {
+      if (temp.data == ele) {
+        if (temp.prev == null) {
+          this.head = temp.next;
+          this.head.prev = null;
+        } else {
+          temp.prev.next = temp.next;
+          temp.next.prev = temp.prev;
+        }
+        temp = null;
+        return;
+      }
+      temp = temp.next;
+    }
+
+    // Last Node
+    if (temp.data == ele) {
+      temp.prev.next = null;
+      temp = null;
+    }
   }
 
   public void display() {
