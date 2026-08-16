@@ -35,6 +35,45 @@ public class DoublyLinkedList {
     temp.next = newNode;
   }
 
+  public void insertAtBeginning(int value) {
+    Node newNode = new Node(value);
+
+    if (this.head == null) {
+      this.head = newNode;
+      return;
+    }
+
+    this.head.prev = newNode;
+    newNode.next = this.head;
+    this.head = newNode;
+  }
+
+  public void insertAfter(int value, int ele) {
+    Node newNode = new Node(value);
+
+    Node temp = this.head;
+    while (temp.next != null) {
+      if (temp.data == ele) {
+        newNode.next = temp.next;
+        newNode.prev = temp;
+        temp.next.prev = newNode;
+        temp.next = newNode;
+        return;
+      }
+      temp = temp.next;
+    }
+
+    // Check last node
+    if (temp.data == ele) {
+      temp.next = newNode;
+      newNode.prev = temp;
+      return;
+    }
+
+    /// If the element is not found
+    System.out.println(ele + " not found");
+  }
+
   public void display() {
     Node temp = this.head;
     while (temp != null) {

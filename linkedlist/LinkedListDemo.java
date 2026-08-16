@@ -12,18 +12,21 @@ public class LinkedListDemo {
     // list.insertAtBeginning(1);
 
     // list.insertAfter(25, 20);
-    // list.insertAfter(25, 40); // 40 does not exist
+    // list.insertAfter(40, 30);
+    // list.insertAfter(25, 35); // 35 does not exist
 
-    // list.display(); // 1 5 10 20 25 30
+    // list.display(); // 1 5 10 20 25 30 40
 
     // list.delete(20);
-    // list.display(); // 1 5 10 25 30
+    // list.display(); // 1 5 10 25 30 40
 
     // list.delete(1);
+    // list.display(); // 5 10 25 30 40
+
+    // list.delete(40);
     // list.display(); // 5 10 25 30
 
-    // list.delete(30);
-    // list.display(); // 5 10 25
+    // ==============================================================
 
     DoublyLinkedList list = new DoublyLinkedList();
 
@@ -32,5 +35,17 @@ public class LinkedListDemo {
     list.insertAtEnd(30);
 
     list.display(); // 10 20 30
+
+    list.insertAtBeginning(5);
+    list.insertAtBeginning(1);
+
+    list.display(); // 1 5 10 20 30
+
+    list.insertAfter(15, 10);
+    list.insertAfter(3, 1);
+    list.insertAfter(40, 30);
+    list.insertAfter(40, 35); // 35 does not exist
+
+    list.display(); // 1 3 5 10 15 20 30 40
   }
 }

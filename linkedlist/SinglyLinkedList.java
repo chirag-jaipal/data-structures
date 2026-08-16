@@ -59,7 +59,7 @@ public class SinglyLinkedList {
     }
 
     // If the element is not found
-    System.out.println("Element not found");
+    System.out.println(ele + " not found");
   }
 
   public void delete(int ele) {
