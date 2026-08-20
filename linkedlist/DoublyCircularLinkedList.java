@@ -1,20 +1,21 @@
 package linkedlist;
 
-public class SinglyCircularLinkedList {
-  private static class Node {
+public class DoublyCircularLinkedList {
+  private class Node {
     int data;
     Node next;
+    Node prev;
 
     Node(int data) {
       this.data = data;
-      this.next = null;
+      this.next = this.prev = null;
     }
   }
 
   private Node head;
   private Node tail;
 
-  public SinglyCircularLinkedList() {
+  public DoublyCircularLinkedList() {
     this.head = this.tail = null;
   }
 
@@ -24,12 +25,15 @@ public class SinglyCircularLinkedList {
     if (this.head == null) {
       this.head = this.tail = newNode;
       this.tail.next = this.head;
+      this.tail.prev = this.head;
       return;
     }
 
     this.tail.next = newNode;
+    newNode.prev = this.tail;
     this.tail = newNode;
-    this.tail.next = this.head;
+    newNode.next = this.head;
+    this.head.prev = newNode;
   }
 
   public void insertAtBeginning(int value) {
@@ -38,12 +42,15 @@ public class SinglyCircularLinkedList {
     if (this.head == null) {
       this.head = this.tail = newNode;
       this.tail.next = this.head;
+      this.tail.prev = this.head;
       return;
     }
 
+    this.tail.next = newNode;
     newNode.next = this.head;
+    this.head.prev = newNode;
     this.head = newNode;
-    this.tail.next = this.head;
+    this.head.prev = this.tail;
   }
 
   public void insertAfter(int value, int ele) {
@@ -58,11 +65,14 @@ public class SinglyCircularLinkedList {
     do {
       if (temp.data == ele) {
         newNode.next = temp.next;
+        newNode.prev = temp;
+        temp.next.prev = newNode;
         temp.next = newNode;
 
         if (ele == this.tail.data) {
           this.tail = newNode;
         }
+
         return;
       }
       temp = temp.next;
@@ -74,40 +84,36 @@ public class SinglyCircularLinkedList {
 
   public void delete(int ele) {
     Node temp = this.head;
-    Node prev = temp;
-
     if (temp == null) {
       System.out.println("LinkedList is empty.");
       return;
     }
 
-    // Deleting head node
-    if (temp.data == ele) {
-      // Only one node is present
-      if (this.head.data == this.tail.data) {
-        this.head = this.tail = null;
-      } else {
-        this.head = temp.next;
-        this.tail.next = this.head;
-        temp = null;
-      }
+    // Deleting, if only one node exist
+    if (this.head.data == this.tail.data && temp.data == ele) {
+      this.head = this.tail = null;
       return;
     }
 
     do {
       if (temp.data == ele) {
-        prev.next = temp.next;
+        temp.prev.next = temp.next;
+        temp.next.prev = temp.prev;
 
+        // Handling tail node
         if (temp.data == this.tail.data) {
-          this.tail = prev;
+          this.tail = temp.prev;
+        }
+
+        // Handling head node
+        if (temp.data == this.head.data) {
+          this.head = temp.next;
         }
 
         temp = null;
         return;
-      } else {
-        prev = temp;
-        temp = temp.next;
       }
+      temp = temp.next;
     } while (temp != this.head);
   }
 

@@ -51,7 +51,7 @@ public class DoublyLinkedList {
   public void insertAfter(int value, int ele) {
     Node temp = this.head;
     if (temp == null) {
-      System.out.print("LinkedList is empty.");
+      System.out.println("LinkedList is empty.");
       return;
     }
 
@@ -82,7 +82,7 @@ public class DoublyLinkedList {
   public void delete(int ele) {
     Node temp = this.head;
     if (temp == null) {
-      System.out.print("LinkedList is empty.");
+      System.out.println("LinkedList is empty.");
       return;
     }
 

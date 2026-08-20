@@ -67,7 +67,7 @@ public class SinglyLinkedList {
     Node prev = temp;
 
     if (temp == null) {
-      System.out.print("LinkedList is empty.");
+      System.out.println("LinkedList is empty.");
       return;
     }
 
