@@ -10,6 +10,8 @@ public class StackUsingArrayDemo {
     stack.push(40);
     stack.push(50);
 
+    System.out.println("Stack Length: " + stack.length()); // 5
+
     System.out.println(stack.peek()); // 50
 
     System.out.println(stack.pop()); // 50
