@@ -4,13 +4,16 @@ public class StackUsingArray {
   private int arr[];
   private int top;
 
-  public StackUsingArray(int size) {
-    this.arr = new int[size];
+  public StackUsingArray(int capacity) {
+    if (capacity <= 0) {
+      throw new IllegalArgumentException("Capacity must be greater than 0");
+    }
+    this.arr = new int[capacity];
     this.top = -1;
   }
 
   public int length() {
-    return this.arr.length;
+    return this.top + 1;
   }
 
   public boolean isEmpty() {

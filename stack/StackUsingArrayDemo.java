@@ -23,6 +23,6 @@ public class StackUsingArrayDemo {
     System.out.println(stack.pop()); // 20
     System.out.println(stack.pop()); // 10
 
-    System.out.println(stack.peek()); // Stack Underflow!
+    System.out.println("Stack Length: " + stack.length());
   }
 }
