@@ -41,6 +41,38 @@ public class BinarySearchTree {
     }
   }
 
+  private static Node getInorderSuccessor(Node temp) {
+    temp = temp.right;
+    while (temp.left != null) {
+      temp = temp.left;
+    }
+    return temp;
+  }
+
+  public static Node delete(Node root, int val) {
+    if (root == null) {
+      return root;
+    }
+
+    if (root.data > val) {
+      root.left = delete(root.left, val);
+    } else if (root.data < val) {
+      root.right = delete(root.right, val);
+    } else {
+      if (root.left == null) {
+        return root.right;
+      } else if (root.right == null) {
+        return root.left;
+      } else {
+        Node inOrderSucc = getInorderSuccessor(root);
+        root.data = inOrderSucc.data;
+        root.right = delete(root.right, inOrderSucc.data);
+      }
+    }
+
+    return root;
+  }
+
   public static void inOrderTraversal(Node root) {
     if (root != null) {
       inOrderTraversal(root.left);
@@ -60,7 +92,7 @@ public class BinarySearchTree {
     root = insert(root, 23);
 
     System.out.println("INORDER TRAVERSAL: ");
-    inOrderTraversal(root);
+    inOrderTraversal(root); // 15 20 23 25 30 40 50
     System.out.println("\nROOT: " + root.data); // 20
 
     System.out.println("SEARCHED ELE: " + search(root, 20)); // 20
@@ -71,5 +103,17 @@ public class BinarySearchTree {
     System.out.println("SEARCHED ELE: " + search(root, 50)); // 50
     System.out.println("SEARCHED ELE: " + search(root, 23)); // 23
     System.out.println("SEARCHED ELE: " + search(root, 10)); // -1 -> Element not found
+
+    root = delete(root, 23);
+    System.out.println("INORDER TRAVERSAL: ");
+    inOrderTraversal(root); // 15 20 25 30 40 50
+
+    root = delete(root, 40);
+    System.out.println("\nINORDER TRAVERSAL: ");
+    inOrderTraversal(root); // 15 20 25 30 50
+
+    root = delete(root, 30);
+    System.out.println("\nINORDER TRAVERSAL: ");
+    inOrderTraversal(root); // 15 20 25 50
   }
 }
