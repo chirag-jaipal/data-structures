@@ -1,5 +1,7 @@
 package graph;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -28,5 +30,43 @@ public class GraphAdjacencyListRepresentation {
     for (Integer key : this.list.keySet()) {
       System.out.println(key + " : " + this.list.get(key));
     }
+  }
+
+  public void dfsIterative(int src) {
+    boolean visited[] = new boolean[this.list.size()];
+    Deque<Integer> stack = new ArrayDeque<>();
+
+    stack.push(src);
+    visited[src] = true;
+
+    while (!stack.isEmpty()) {
+      int curr = stack.pop();
+      System.out.print(curr + " ");
+
+      LinkedList<Integer> list = this.list.get(curr);
+      for (Integer vertex : list) {
+        if (!visited[vertex]) {
+          stack.push(vertex);
+          visited[vertex] = true;
+        }
+      }
+    }
+  }
+
+  private void dfsRecHelper(int src, boolean visited[]) {
+    visited[src] = true;
+    System.out.print(src + " ");
+
+    LinkedList<Integer> list = this.list.get(src);
+    for (Integer vertex : list) {
+      if (!visited[vertex]) {
+        dfsRecHelper(vertex, visited);
+      }
+    }
+  }
+
+  public void dfsRecursive(int src) {
+    boolean visited[] = new boolean[this.list.size()];
+    dfsRecHelper(src, visited);
   }
 }
