@@ -4,6 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class GraphAdjacencyListRepresentation {
   private HashMap<Integer, LinkedList<Integer>> list;
@@ -68,5 +69,26 @@ public class GraphAdjacencyListRepresentation {
   public void dfsRecursive(int src) {
     boolean visited[] = new boolean[this.list.size()];
     dfsRecHelper(src, visited);
+  }
+
+  public void bfs(int src) {
+    boolean visited[] = new boolean[this.list.size()];
+    Queue<Integer> queue = new LinkedList<>();
+
+    queue.offer(src);
+    visited[src] = true;
+
+    while (!queue.isEmpty()) {
+      int curr = queue.poll();
+      System.out.print(curr + " ");
+
+      LinkedList<Integer> list = this.list.get(curr);
+      for (Integer vertex : list) {
+        if (!visited[vertex]) {
+          queue.offer(vertex);
+          visited[vertex] = true;
+        }
+      }
+    }
   }
 }

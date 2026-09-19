@@ -18,5 +18,8 @@ public class GraphAdjacencyMatRepDemo {
 
     System.out.println("\n\nDFS TRAVERSAL RECURSIVE: ");
     graph.dfsRecursive(0);
+
+    System.out.println("\n\nBFS TRAVERSAL: ");
+    graph.bfs(0);
   }
 }

@@ -2,6 +2,8 @@ package graph;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class GraphAdjacencyMatrixRepresentation {
   private int[][] mat;
@@ -65,5 +67,25 @@ public class GraphAdjacencyMatrixRepresentation {
   public void dfsRecursive(int src) {
     boolean visited[] = new boolean[this.size];
     dfsRecHelper(src, visited);
+  }
+
+  public void bfs(int src) {
+    boolean visited[] = new boolean[this.size];
+    Queue<Integer> queue = new LinkedList<>();
+
+    queue.offer(src);
+    visited[src] = true;
+
+    while (!queue.isEmpty()) {
+      int curr = queue.poll();
+      System.out.print(curr + " ");
+
+      for (int i = 0; i < this.size; i++) {
+        if (this.mat[curr][i] == 1 && !visited[i]) {
+          queue.offer(i);
+          visited[i] = true;
+        }
+      }
+    }
   }
 }
